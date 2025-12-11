@@ -39,7 +39,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/yourusername/douban-top250-spider.git
+git clone https://github.com/gushi4421/douban-top250-spider.git
 cd douban-top250-spider
 
 # 安装依赖包
