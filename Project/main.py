@@ -51,13 +51,13 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parse = argparse.ArgumentParser(description="豆瓣电影Top250爬虫")
+    parser = argparse.ArgumentParser(description="豆瓣电影Top250爬虫")
 
     # csv保存相关参数
-    parse.add_argument(
+    parser.add_argument(
         "--if_save_to_csv", type=bool, default=True, help="是否保存到csv文件中"
     )
-    parse.add_argument(
+    parser.add_argument(
         "--csv_save_path",
         type=str,
         default="data/douban_top250_movies.csv",
@@ -65,10 +65,10 @@ if __name__ == "__main__":
     )
 
     # excel保存相关参数
-    parse.add_argument(
+    parser.add_argument(
         "--if_save_to_excel", type=bool, default=True, help="是否保存到excel文件中"
     )
-    parse.add_argument(
+    parser.add_argument(
         "--excel_save_path",
         type=str,
         default="data/douban_top250_movies.xlsx",
@@ -76,10 +76,10 @@ if __name__ == "__main__":
     )
 
     # json保存相关参数
-    parse.add_argument(
+    parser.add_argument(
         "--if_save_to_json", type=bool, default=True, help="是否保存到json文件中"
     )
-    parse.add_argument(
+    parser.add_argument(
         "--json_save_path",
         type=str,
         default="data/douban_top250_movies.json",
@@ -87,20 +87,20 @@ if __name__ == "__main__":
     )
 
     # 可视化相关参数
-    parse.add_argument(
+    parser.add_argument(
         "--if_data_visualization",
         type=bool,
         default=True,
         help="是否进行数据可视化分析",
     )
-    parse.add_argument(
+    parser.add_argument(
         "--image_save_dir", type=str, default="images", help="图片保存目录"
     )
-    parse.add_argument(
+    parser.add_argument(
         "--show_charts", type=bool, default=False, help="是否显示图表（交互模式）"
     )
 
-    args = parse.parse_args()
+    args = parser.parse_args()
 
     main(args)
     print("爬取完成！如果觉得这个项目对你有帮助的话，不妨点个Star支持一下吧！")
