@@ -184,7 +184,7 @@ class MovieSpider:
                 p_lines = [line.strip() for line in p_text.split("\n") if line.strip()]
                 if len(p_lines) >= 2:
                     first_line = p_lines[0]  # &nbsp已被BeautifulSoup自动处理为普通空格
-                    print(first_line)
+
                     # 解析导演
                     if "导演:" in first_line:
                         director = first_line.split("导演:")[1]
@@ -269,7 +269,7 @@ class MovieSpider:
                 movie_info["comment"] = None  # 短评可以为空，不强制要求
         else:
             self.logger.warning("未找到包含电影信息的<div class='bd'>标签")
-
+        print(movie_info, "\n")
         return movie_info
 
     def parse_single_page(
