@@ -15,11 +15,14 @@
         9. show_charts: 是否显示可视化图表
 """
 
+import time
 from spiders.spider import MovieSpider
 import argparse
 from utils.data_save import DataSaver
 from utils.data_visualization import DataVisualizer
 from utils.data_clean import DataCleaner  # 导入数据清洗模块
+
+start_time = time.time()
 
 
 def main(args):
@@ -48,6 +51,9 @@ def main(args):
     if args.if_data_visualization:
         visualizer = DataVisualizer(logger=spider.logger, save_dir=args.image_save_dir)
         visualizer.generate_all_charts(df_movies, show=args.show_charts)
+        
+    end_time = time.time()
+    spider.logger.info(f"程序运行完毕，耗时 {end_time - start_time:.2f} 秒")
 
 
 if __name__ == "__main__":
