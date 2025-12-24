@@ -152,7 +152,7 @@ Project/
 - 感谢 Python 课程老师的悉心指导
 - 感谢豆瓣提供的优质电影数据
 - 感谢所有开源贡献者的无私分享
-- 特别鸣谢long1546(https://github.com/long1546)提供一些支持
+- 特别鸣谢[long1546](https://github.com/long1546)提供一些支持
 
 ## 📮 联系方式
 
