@@ -11,20 +11,20 @@
 """
 
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 import time
 import random
 import logging
 from typing import List, Dict, Optional
-import os
-from sympy import true
+from config import BASE_URL, MOVIE_INFO
 
 
 class MovieSpider:
     def __init__(
         self,
-        url: str = "https://movie.douban.com/top250",
+        url: str = BASE_URL,
+        logger: logging.Logger = None,
+        if_print: bool = False,
     ):
         self.url = url
         self.headers = {
@@ -34,25 +34,8 @@ class MovieSpider:
             "Connection": "keep-alive",  # 连接方式
         }
         self.movies: List[Dict[str, Optional[str]]] = []  # 存储电影信息的列表
-        self.setup_logging()
-
-    def setup_logging(self):
-        """
-        设置日志记录
-        """
-        # 创建目录日志
-        if not os.path.exists("logs"):
-            os.makedirs("logs")
-
-        logging.basicConfig(
-            level=logging.INFO,  # 日志级别
-            format="%(asctime)s - %(name)s -  %(levelname)s - %(message)s",  # 日志格式
-            handlers=[
-                logging.FileHandler("logs/spider.log", encoding="utf-8"),  # 日志文件
-                logging.StreamHandler(),  # 控制台输出
-            ],
-        )
-        self.logger = logging.getLogger(__name__)  # 获取日志记录器
+        self.logger = logger
+        self.if_print = if_print
 
     def fetch_page(self, url: str, retries: int = 3) -> Optional[str]:
         """
@@ -94,62 +77,9 @@ class MovieSpider:
     def parse_single_movie(self, movie) -> Optional[Dict]:
         """
         解析单个电影信息
-        Args:
-            movie: 包含单个电影的div标签
-
-        Returns:
-                电影信息字典
-
-        导演，演员部分的说明：
-            第一行: 导演: XXX    主演: YYY /...
-            第二行: 年份 / 国家 / 类型
-
-            解析策略:
-            1. 使用列表推导式清洗数据
-            - 按换行符分割文本
-            - 去除每行首尾空白 (strip)
-            - 过滤掉空行
-            示例:  lines = [line.strip() for line in text.split("\n") if line.strip()]
-
-            2. 导演信息提取 (需要两次分割)
-            原因: 导演在字符串开头，后面紧跟"主演:"信息
-            步骤:
-            - 第一次分割: 按"导演: "分割，取后半部分
-                结果: "XXX    主演: YYY /..."
-            - 第二次分割: 按"主演: "分割，取前半部分
-                结果:  "XXX"
-            - 边界处理: 如果没有"主演:"，直接使用第一次分割结果
-
-            3. 演员信息提取 (只需一次分割)
-            原因: 主演在字符串末尾，后面没有其他关键字段
-            步骤:
-            - 按"主演:"分割，取后半部分
-            - 去除末尾的"..."符号
-            结果: "YYY /"
-
-            4. 年份/国家/类型提取
-            格式: "1994 / 美国 / 犯罪 剧情"
-            方法:  按"/"分割，依次取出三个部分
-
-            关键点:
-            - 导演处理复杂:  位于开头，需要"夹心提取"(去掉前后无关内容)
-            - 演员处理简单: 位于末尾，只需"尾部截取"(去掉前面的关键字)
-            - 使用strip()去除空白字符，使用rstrip()去除右侧特定字符
         """
         # 电影信息相关映射
-        movie_info = {
-            "rank": None,  # 排名
-            "title": None,  # 电影名
-            "director": None,  # 导演
-            "actors": None,  # 演员
-            "year": None,  # 上映时间
-            "country": None,  # 制片国家/地区
-            "classification": None,  # 影片类型
-            "star-rating": None,  # 电影星级评分
-            "nums-rating": None,  # 数字评分
-            "comment_nums": None,  # 评论数
-            "comment": None,  # 短评
-        }
+        movie_info = MOVIE_INFO.copy()
 
         # 爬取电影排名
         div_pic_tag = movie.find("div", class_="pic")
@@ -269,7 +199,9 @@ class MovieSpider:
                 movie_info["comment"] = None  # 短评可以为空，不强制要求
         else:
             self.logger.warning("未找到包含电影信息的<div class='bd'>标签")
-        print(movie_info, "\n")
+
+        if self.if_print:
+            print(movie_info)
         return movie_info
 
     def parse_single_page(

@@ -452,9 +452,3 @@ class DataVisualizer:
         self.plot_star_rating_distribution(df, show=show)
 
         self.logger.info(f"所有图表已生成完成，保存在 {self.save_dir} 目录下")
-
-
-# # 测试代码
-# if __name__ == "__main__":
-#     visualizer = DataVisualizer(save_dir="images")
-#     visualizer.generate_all_charts("data/douban_top250_movies.csv", show=True)
