@@ -10,7 +10,7 @@
 """
 
 import pandas as pd
-from typing import List, Dict, Union, Optional
+from typing import List, Dict, Union
 import logging
 
 

@@ -7,7 +7,7 @@ from config import LOG_PATH
 
 
 def setup_logging():
-    """设置日志记录配置"""
+    """创建日志记录器"""
     logging.basicConfig(
         level=logging.INFO,  # 日志级别
         format="%(asctime)s - %(name)s -  %(levelname)s - %(message)s",  # 日志格式
@@ -20,7 +20,7 @@ def setup_logging():
     return logger
 
 
-def delete_log_file():
+def clear_log_file():
     """删除日志文件"""
     if os.path.exists(LOG_PATH):
         try:
@@ -37,4 +37,4 @@ def delete_log_file():
 
 
 if __name__ == "__main__":
-    delete_log_file()
+    clear_log_file()

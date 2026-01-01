@@ -13,22 +13,17 @@ import jieba
 import numpy as np
 import pandas as pd
 from PIL import Image
-from sympy import false
 from wordcloud import WordCloud
-from typing import List, Optional, Union
+from typing import List, Optional
 import os
 from matplotlib import pyplot as plt
 import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import IMAGE_SAVE_DIR, MASK
+from config import IMAGE_SAVE_DIR
 
 
 class WordCloudGenerator:
-    """
-    词云生成工具类
-    """
-
     def __init__(
         self,
         data: pd.DataFrame,
@@ -36,23 +31,12 @@ class WordCloudGenerator:
         save_dir: str = IMAGE_SAVE_DIR,
         font_path: str = "msyh.ttc",  # 默认字体路径
     ):
-        """
-        初始化词云生成器
-
-        Args:
-            logger: 日志记录器
-            save_dir: 图片保存目录
-            font_path: 字体路径，防止中文乱码
-        """
         self.logger = logger
         self.save_dir = save_dir
         self.font_path = font_path
         self.data = data
 
     def _processing_text(self, text_series: pd.Series) -> str:
-        """
-        对Pandas Series中的文本进行清洗和分词
-        """
         # 1. 拼接所有文本
         text = " ".join(text_series.dropna().astype(str).tolist())
 
@@ -63,18 +47,9 @@ class WordCloudGenerator:
 
     def generate_wordcloud(
         self,
-        mask_path: Optional[str] = MASK,
+        mask_path: Optional[str] = None,
         columns: List[str] = ["comment"],
     ) -> bool:
-        """
-        生成词云图
-
-        Args:
-            data: 数据源 (DataFrame)
-            column_name: 需要分析的列名 (如 'comment', 'classification')
-            file_name: 保存的文件名
-            mask_path: 遮罩图片路径 (可选)
-        """
         if not mask_path:
             self.logger.warning("未提供遮罩图片，无法生成词云")
             return False

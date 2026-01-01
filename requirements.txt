@@ -1,7 +1,9 @@
 requests
-pandas
 beautifulsoup4
+pandas
 lxml
-matplotlib
 openpyxl
-sympy
+matplotlib
+flask         
+jieba         
+wordcloud    

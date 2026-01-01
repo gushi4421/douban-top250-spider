@@ -5,15 +5,14 @@
 
 import time
 import argparse
-import os
 from spiders.spider import MovieSpider
 from utils.data_save import DataSaver
 from utils.data_visualization import DataVisualizer
 from utils.data_clean import DataCleaner
 from utils.wordcloud_generator import WordCloudGenerator
-from utils.log import delete_log_file, setup_logging
+from utils.log import clear_log_file, setup_logging
 from config import LOG_PATH, CSV_PATH, EXCEL_PATH, JSON_PATH, IMAGE_SAVE_DIR, MASK
-import config  # 自动启动config，创建文件夹
+import config
 from typing import List
 
 start_time = time.time()
@@ -24,13 +23,13 @@ def main(args):
 
     # 是否删除先前的日志文件
     if args.if_reset_log:
-        delete_log_file()
+        clear_log_file()
 
     # 设置日志
     logger = setup_logging()
 
     # 创建爬虫实例
-    spider = MovieSpider(logger=logger)
+    spider = MovieSpider(logger=logger, if_print=args.if_print)
 
     # 1. 爬取数据
     movies = spider.parse_all_pages()
@@ -59,7 +58,7 @@ def main(args):
 
     # 5. 词云生成
     if args.if_generate_wordcloud:
-        spider.logger.info("开始生成词云模块")
+        spider.logger.info("开始生成词云")
         wc_generator = WordCloudGenerator(
             data=df_movies,
             logger=spider.logger,
@@ -70,7 +69,7 @@ def main(args):
         wc_generator.generate_wordcloud(
             mask_path=args.wordcloud_mask, columns=args.wordcloud_columns
         )
-        
+
     end_time = time.time()
     spider.logger.info(f"程序运行完毕，耗时 {end_time - start_time:.2f} 秒")
 
@@ -82,7 +81,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--if_print",
         type=bool,
-        default=False,
+        default=True,
         help="是否在终端当中打印爬取到的电影信息",
     )
 

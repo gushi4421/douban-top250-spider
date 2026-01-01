@@ -9,11 +9,6 @@
 
 本项目是我在大学二年级 Python 程序设计课程的期末大作业，是一个简单易用的 Python 爬虫工具，用于获取豆瓣电影 Top 250 榜单的电影信息，包括电影名称、评分、导演、主演、年份、类型等详细数据。
 
-**课程信息：**
-- 📖 课程名称：Python 程序设计
-- 🎓 学期：大二上学期/下学期
-- 🎯 作业类型：期末大作业
-
 ---
 
 ## ✨ 功能特性
@@ -22,6 +17,7 @@
 - 🧹 数据清洗, 规范数据的格式
 - 💾 支持多种数据导出格式（CSV、JSON、Excel）
 - 📊 数据可视化, 使用 matplotlib 生成分析图表
+- 🌐 Web 应用界面，使用 Flask 提供交互式数据浏览和可视化
 - 🛡️ 友好的请求频率控制，避免对服务器造成压力
 - 📝 完整的日志记录
 - 🔄 断点续爬功能
@@ -33,7 +29,6 @@
 ### 环境要求
 
 - Python 3.7+
-- pip 包管理器
 
 ### 安装依赖
 
@@ -49,10 +44,30 @@ pip install -r requirements.txt
 
 ### 使用方法
 
+#### 1. 爬取数据
+
 ``` bash
+# 进入 Project 目录
+cd Project
+
 # 基础使用
 python main.py
 ```
+
+#### 2. 启动 Web 应用
+
+数据爬取完成后，可以启动 Flask Web 应用查看可视化结果：
+
+```bash
+# 确保在 Project 目录下
+cd Project
+
+# 启动 Flask 应用
+python app.py
+```
+
+然后在浏览器中访问 `http://localhost:5000` 查看可视化结果。
+
 #### 常用命令参数
 你可以通过命令行参数自定义保存路径或控制功能开关
 ``` bash
@@ -82,18 +97,31 @@ python main.py --csv_save_path "./my_data/movies.csv" --show_charts True
 ## 📁 项目结构
 
 ```
-Project/
+douban-top250-spider/
+├── Project/
+│   ├── app.py              # Flask Web 应用入口
+│   ├── templates/          # HTML 模板
+│   │   ├── index.html      # 首页
+│   │   ├── movie.html      # 电影列表页
+│   │   ├── score.html      # 数据分析页
+│   │   ├── cloud.html      # 词云页
+│   │   ├── team.html       # 团队页
+│   │   └── aboutMe.html    # 关于页
+│   ├── spiders/
+│   │   └── spider.py       # 爬虫核心逻辑 (MovieSpider 类)
+│   ├── utils/
+│   │   ├── data_clean.py   # 数据清洗模块 (DataCleaner 类)
+│   │   ├── data_save.py    # 数据保存模块 (DataSaver 类)
+│   │   └── data_visualization.py # 数据可视化模块 (DataVisualizer 类)
+│   ├── main.py             # 爬虫程序主入口
+│   └── README.md           # Flask 应用文档
+├── static/
+│   └── images/             # 静态图片资源 (运行后生成)
 ├── data/                   # 存放爬取到的数据文件 (运行后生成)
 ├── images/                 # 存放生成的可视化图表 (运行后生成)
 ├── logs/                   # 存放运行日志 (spider.log)
-├── spiders/
-│   └── spider.py           # 爬虫核心逻辑 (MovieSpider 类)
-├── utils/
-│   ├── data_clean.py       # 数据清洗模块 (DataCleaner 类)
-│   ├── data_save.py        # 数据保存模块 (DataSaver 类)
-│   └── data_visualization.py # 数据可视化模块 (DataVisualizer 类)
-├── main.py                 # 程序主入口
-└── requirements.txt        # 依赖列表
+├── requirements.txt        # 依赖列表
+└── README.md               # 项目说明文档
 ```
 
 ---
@@ -114,6 +142,28 @@ Project/
   "genre": "剧情 / 犯罪"
 }
 ```
+
+---
+
+## 🌐 Web 应用功能
+
+项目集成了 Flask Web 应用，提供友好的可视化界面：
+
+### 页面功能
+- **首页 (`/index`)**: 欢迎页面，提供导航入口
+- **电影列表 (`/movie`)**: 表格展示所有 250 部电影的详细信息
+- **数据分析 (`/score`)**: 使用 ECharts 展示评分分布和年份分布图表
+- **词云图 (`/word`)**: 展示评论和标题的词云可视化
+- **团队 (`/team`)**: 项目团队成员介绍
+- **关于 (`/aboutMe`)**: 项目详细信息和使用说明
+
+### Web 应用特点
+- 🎨 现代化的响应式设计
+- 📊 交互式数据图表（基于 ECharts）
+- 🔍 清晰的数据展示
+- 🚀 快速启动，无需额外配置
+
+详细使用说明请参考 `Project/README.md`
 
 ---
 

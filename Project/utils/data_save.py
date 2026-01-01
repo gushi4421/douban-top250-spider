@@ -12,7 +12,7 @@
 
 import os
 import pandas as pd
-from typing import List, Dict, Optional, Union
+from typing import List, Dict, Union
 import logging
 
 
