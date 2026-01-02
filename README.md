@@ -105,7 +105,6 @@ douban-top250-spider/
 │   │   ├── movie.html      # 电影列表页
 │   │   ├── score.html      # 数据分析页
 │   │   ├── cloud.html      # 词云页
-│   │   ├── team.html       # 团队页
 │   │   └── aboutMe.html    # 关于页
 │   ├── spiders/
 │   │   └── spider.py       # 爬虫核心逻辑 (MovieSpider 类)
