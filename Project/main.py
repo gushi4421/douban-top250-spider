@@ -11,7 +11,7 @@ from utils.data_visualization import DataVisualizer
 from utils.data_clean import DataCleaner
 from utils.wordcloud_generator import WordCloudGenerator
 from utils.log import clear_log_file, setup_logging
-from config import LOG_PATH, CSV_PATH, EXCEL_PATH, JSON_PATH, IMAGE_SAVE_DIR, MASK
+from config import CSV_PATH, EXCEL_PATH, JSON_PATH, IMAGE_SAVE_DIR, MASK
 import config
 from typing import List
 

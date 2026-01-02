@@ -1,46 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>关于我 - Gushi</title>
 
-  <title>豆瓣Top250数据分析</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
+  <!-- 引用静态资源 -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+  
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+  <style>
+      /* 自定义卡片样式 */
+      .github-card {
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          transition: transform 0.3s;
+      }
+      .github-card:hover {
+          transform: translateY(-5px);
+      }
+      .github-btn {
+          background-color: #24292e; /* GitHub 黑色 */
+          color: white;
+          padding: 12px 35px;
+          border-radius: 30px;
+          text-decoration: none;
+          transition: all 0.3s;
+          display: inline-block;
+          margin-top: 20px;
+      }
+      .github-btn:hover {
+          background-color: #20b38e; /* 悬停变青色 */
+          color: white;
+          box-shadow: 0 5px 15px rgba(32, 179, 142, 0.3);
+      }
+      .avatar-box {
+          width: 120px;
+          height: 120px;
+          margin: 0 auto 20px;
+          background-color: #f0f0f0;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 60px;
+          color: #666;
+      }
+  </style>
 </head>
 
 <body>
 
-
-
-  <!-- ======= Header ======= -->
+  <!-- Header -->
   <header id="header">
     <div class="container">
-
       <div class="logo float-left">
-        <h1 class="text-light"><a href="temp.html"><span>Lzz</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="temp.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <h1 class="text-light"><a href="/index"><span>Gushi</span></a></h1>
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
@@ -50,72 +77,76 @@
           <li><a href="/score">评分</a></li>
           <li><a href="/word">词云</a></li>
           <li class="active"><a href="/aboutMe">关于我</a></li>
-
         </ul>
-      </nav><!-- .nav-menu -->
-
+      </nav>
     </div>
-  </header><!-- End Header -->
+  </header>
 
-     <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container">
+  <!-- 关于我 主体内容 -->
+  <section id="about" class="about">
+    <div class="container">
 
-        <div class="section-title">
-          <h2>About Me</h2>
-        </div>
+      <div class="section-title">
+        <h2>About Me</h2>
+        <p>了解更多开发者信息与项目源码</p>
+      </div>
 
-        <div class="row">
+      <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+              
+              <!-- 个人资料卡片 -->
+              <div class="card github-card text-center p-5">
+                  <div class="card-body">
+                      <!-- 头像区域：这里用图标代替，您也可以换成您的GitHub头像链接 -->
+                      <div class="avatar-box">
+                          <i class="bx bxl-github"></i>
+                      </div>
 
-{#          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up">#}
-          <div class="col-md" data-aos="fade-up">
+                      <h3 style="font-weight: 700; color: #333;">Gushi</h3>
+                      <p class="text-muted mb-4">Python Full Stack Developer</p>
+                      
+                      <p class="lead" style="font-size: 16px; line-height: 1.8; color: #555;">
+                          欢迎访问我的个人主页！<br>
+                          本项目是一个基于 Flask 的豆瓣电影数据分析演示系统。<br>
+                          您可以在我的 GitHub 上找到本项目的完整源代码以及更多有趣的作品。
+                      </p>
 
-            <div class="member">
-              <div class="pic"><img src="assets/img/wechat.jpg" class="img-fluid" alt=""></div>
-
-            </div>
-
+                      <!-- 跳转按钮 -->
+                      <a href="https://github.com/gushi4421" target="_blank" class="github-btn">
+                          <i class="bx bxl-github"></i> 访问 GitHub 主页
+                      </a>
+                  </div>
+              </div>
 
           </div>
-
-
-
-        </div>
-
-      </div>
-    </section><!-- End Our Team Section -->
-
-
-
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
- 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Lzz</span></strong>. All Rights Reserved
       </div>
 
     </div>
-  </footer><!-- End Footer -->
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Gushi</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='assets/vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/jquery-sticky/jquery.sticky.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/counterup/counterup.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
 </body>
-
 </html>

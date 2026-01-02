@@ -21,7 +21,7 @@ def setup_logging():
 
 
 def clear_log_file():
-    """删除日志文件"""
+    """清除日志文件"""
     if os.path.exists(LOG_PATH):
         try:
             with open(LOG_PATH, "w", encoding="utf-8") as f:

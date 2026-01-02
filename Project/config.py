@@ -17,12 +17,12 @@ EXCEL_PATH = os.path.join(
 STOPWORDS_PATH = os.path.join(BASE_DATA_DIR, "stopwords.txt")  # 停用词文件路径
 
 # 图片保存目录
-BASE_STATIC_DIR = "static"
+BASE_STATIC_DIR = "static/visualization"
 IMAGE_SAVE_DIR = os.path.join(BASE_STATIC_DIR, "images")
 
 # 词云遮罩路径
 BASE_MASK_DIR = os.path.join(BASE_STATIC_DIR, "masks")
-MASK = os.path.join(BASE_MASK_DIR, "tree.jpg")
+MASK = os.path.join(BASE_MASK_DIR, "example.png")
 GENERATE_WORDCLOUD_DIR = []
 
 # 检查有无遮罩图片

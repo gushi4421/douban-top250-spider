@@ -4,40 +4,70 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>豆瓣Top250数据分析</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ url_for('assets', filename='assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ url_for('assets', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <!-- 建议使用 url_for 生成静态文件路径，这里暂时保留相对路径以匹配你的项目结构 -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <style>
+      .search-container {
+          margin-bottom: 25px;
+          text-align: center;
+      }
+      .search-box {
+          width: 60%;
+          padding: 10px 20px;
+          border-radius: 50px;
+          border: 1px solid #ddd;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+          outline: none;
+          transition: all 0.3s;
+      }
+      .search-box:focus {
+          border-color: #20b38e;
+          box-shadow: 0 4px 10px rgba(32, 179, 142, 0.2);
+          width: 65%;
+      }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+      /* 排名徽章样式 */
+      .rank-badge {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          border-radius: 50%;
+          background-color: #eee;
+          color: #666;
+          font-weight: bold;
+      }
+      /* 前三名给不同颜色 */
+      .rank-1 { background-color: #ffc107; color: #fff; } /* 金 */
+      .rank-2 { background-color: #adb5bd; color: #fff; } /* 银 */
+      .rank-3 { background-color: #e6a23c; color: #fff; } /* 铜 */
 
+      .rating-score {
+          color: #ff9800;
+          font-weight: bold;
+          font-size: 1.1em;
+      }
+  </style>
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
   <header id="header">
     <div class="container">
-
       <div class="logo float-left">
-        <h1 class="text-light"><a href="temp.html"><span>Lzz</span></a></h1>
+        <h1 class="text-light"><a href="/index"><span>Gushi</span></a></h1>
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
@@ -48,87 +78,121 @@
           <li><a href="/word">词云</a></li>
           <li><a href="/aboutMe">关于我</a></li>
         </ul>
-      </nav><!-- .nav-menu -->
-
+      </nav>
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>豆瓣电影Top250电影</h2>
-        </div>
-
-        <!-- ======= Counts Section ======= -->
-    <section class="counts section-bg">
-      <div class="container">
-          <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>排名</th>
-                      <th>电影中文名称</th>
-                      <th>评分</th>
-                      <th>评价人数</th>
-                      <th>一句话概述</th>
-                      <th>上映时间</th>
-                      <th>地区</th>
-                      <th>分类</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for movie in movies %}
-                  <tr>
-                      <!-- 对应 config.py 中的 MOVIE_INFO 字典键名 -->
-                      <td>{{ movie.rank }}</td>
-                      <td>
-                          <!-- 数据源中无URL，直接显示标题 -->
-                          {{ movie.title }}
-                      </td>
-                      <!-- 包含连字符的键名使用 ['key'] 语法 -->
-                      <td>{{ movie['nums-rating'] }}</td>
-                      <td>{{ movie.comment_nums }}</td>
-                      <td>{{ movie.comment }}</td>
-                      <td>{{ movie.year }}</td>
-                      <td>{{ movie.country }}</td>
-                      <td>{{ movie.classification }}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-        </div>
-    </section><!-- End Counts Section -->
-
+  <!-- 电影列表主体区域 -->
+  <section id="team" class="team">
+    <div class="container">
+      <div class="section-title">
+        <h2>豆瓣电影Top250电影</h2>
+        <p>支持实时搜索筛选</p>
       </div>
-    </section><!-- End Our Team Section -->
 
+      <!-- 改动1：添加搜索框 -->
+      <div class="search-container" data-aos="fade-up">
+          <input type="text" id="searchInput" class="search-box" placeholder="🔍 输入电影名、导演、类型或年份进行搜索...">
+      </div>
 
-  <!-- ======= Footer ======= -->
+      <section class="counts section-bg">
+        <div class="container">
+          <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                  <thead class="thead-light">
+                      <tr>
+                          <th style="width: 80px;">排名</th>
+                          <th>电影名称</th>
+                          <th>评分</th>
+                          <th>评价人数</th>
+                          <th>一句话概述</th>
+                          <th>年份</th>
+                          <th>地区</th>
+                          <th>分类</th>
+                      </tr>
+                  </thead>
+                  <tbody id="movieTableBody">
+                      {% for movie in movies %}
+                      <tr>
+                          <td>
+                              <span class="rank-badge 
+                                {% if movie.rank == '1' %}rank-1
+                                {% elif movie.rank == '2' %}rank-2
+                                {% elif movie.rank == '3' %}rank-3
+                                {% endif %}">
+                                {{ movie['rank'] }}
+                              </span>
+                          </td>
+                          <td style="font-weight: 600;">{{ movie['title'] }}</td>
+                          <td class="rating-score">{{ movie['nums-rating'] }}</td>
+                          <td>{{ movie['comment_nums'] }}</td>
+                          <td style="font-style: italic; color: #666;">{{ movie['comment'] }}</td>
+                          <td>{{ movie['year'] }}</td>
+                          <td>{{ movie['country'] }}</td>
+                          <td>
+                              <span class="badge badge-info" style="font-weight: normal; background-color: #17a2b8;">
+                                  {{ movie['classification'] }}
+                              </span>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+              <!-- 搜索无结果时的提示 -->
+              <div id="noResult" style="display:none; text-align:center; padding: 20px; color: #666;">
+                  未找到相关电影
+              </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- 底部版权 -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Lzz</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Gushi</span></strong>. All Rights Reserved
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
+  <!-- 引入 JS -->
+  <script src="{{ url_for('static', filename='assets/vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/jquery-sticky/jquery.sticky.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/counterup/counterup.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script>
+      $(document).ready(function(){
+        $("#searchInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          var hasResult = false;
+          
+          $("#movieTableBody tr").filter(function() {
+            var isMatch = $(this).text().toLowerCase().indexOf(value) > -1;
+            $(this).toggle(isMatch);
+            if(isMatch) hasResult = true;
+          });
+
+          if (!hasResult) {
+              $("#noResult").show();
+              if (value === "") $("#noResult").hide(); 
+          } else {
+              $("#noResult").hide();
+          }
+        });
+      });
+  </script>
 
 </body>
 </html>

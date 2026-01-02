@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>豆瓣Top250数据分析</title>
-
-  <!-- 静态资源引用 -->
+  
+  <!-- 静态资源引用修正 -->
   <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
   <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
@@ -17,7 +17,6 @@
   <link href="{{ url_for('static', filename='assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,8 +30,8 @@
         <ul>
           <li><a href="/index">首页<i class="la la-angle-down"></i></a></li>
           <li><a href="/movie">电影</a></li>
-          <li><a href="/score">评分</a></li>
-          <li class="active"><a href="/word">词云</a></li>
+          <li class="active"><a href="/score">评分</a></li>
+          <li><a href="/word">词云</a></li>
           <li><a href="/aboutMe">关于我</a></li>
         </ul>
       </nav>
@@ -41,45 +40,47 @@
 
   <section id="team" class="team">
     <div class="container">
-
-      <div class="section-title">
-        <h2>词云分析</h2>
-        <p>通过对电影短评和标题进行分词统计，生成的词云图。</p>
-      </div>
-
-      <div class="row">
-
-        <!-- 评论词云 -->
-        <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="member w-100">
-            <div class="pic">
-                <!-- 引用 wordcloud_comment.png -->
-                <img src="{{ url_for('static', filename='visualization/images/wordcloud_comment.png') }}" class="img-fluid" alt="评论词云" style="width: 100%;">
-            </div>
-            <div class="member-info">
-              <h4>电影短评词云</h4>
-              <span>Keywords from Comments</span>
-              <p>展示了Top250电影短评中出现频率最高的词汇</p>
-            </div>
+      
+      <section class="counts section-bg">
+        <div class="container">
+          <div class="section-title">
+             <h2>评分分布可视化</h2>
+             <p>基于 Matplotlib 生成的统计图表</p>
+          </div>
+          <div class="row justify-content-center">
+             <div class="col-lg-10">
+                <img src="{{ url_for('static', filename='visualization/images/rating_distribution.png') }}" class="img-fluid" alt="评分分布图">
+             </div>
           </div>
         </div>
+      </section>
 
-        <!-- 标题词云 -->
-        <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-          <div class="member w-100">
-            <div class="pic">
-                <!-- 引用 wordcloud_title.png -->
-                <img src="{{ url_for('static', filename='visualization/images/wordcloud_title.png') }}" class="img-fluid" alt="标题词云" style="width: 100%;">
-            </div>
-            <div class="member-info">
-              <h4>电影标题词云</h4>
-              <span>Keywords from Titles</span>
-              <p>展示了Top250电影标题中的高频词汇</p>
-            </div>
+      <section class="counts section-bg mt-4">
+        <div class="container">
+          <div class="section-title">
+             <h2>上映年份分布</h2>
+          </div>
+          <div class="row justify-content-center">
+             <div class="col-lg-10">
+                <img src="{{ url_for('static', filename='visualization/images/year_distribution.png') }}" class="img-fluid" alt="年份分布图">
+             </div>
           </div>
         </div>
+      </section>
 
-      </div>
+      <section class="counts section-bg mt-4">
+        <div class="container">
+          <div class="section-title">
+             <h2>制片国家/地区分布</h2>
+          </div>
+          <div class="row justify-content-center">
+             <div class="col-lg-10">
+                <!-- 引用 country_distribution.png -->
+                <img src="{{ url_for('static', filename='visualization/images/country_distribution.png') }}" class="img-fluid" alt="国家分布图">
+             </div>
+          </div>
+        </div>
+      </section>
 
     </div>
   </section>
