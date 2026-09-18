@@ -92,7 +92,7 @@ python main.py --csv_save_path "./my_data/movies.csv" --show_charts True
 | `--json_save_path` | str | `data/douban_top250_movies.json` | JSON 文件的保存路径 |
 | **数据可视化** | | | |
 | `--if_data_visualization`| bool | `True` | 是否执行 Matplotlib 常规图表分析 |
-| `--image_save_dir` | str | `static/images`| 可视化图表和词云图片的保存目录 |
+| `--image_save_dir` | str | `static/visualization/images`| 可视化图表和词云图片的保存目录 |
 | `--show_charts` | bool | `False` | 生成图表时是否弹出窗口显示（Web部署建议关闭） |
 | **词云生成** | | | |
 | `--if_generate_wordcloud`| bool | `True` | 是否基于文本生成词云图 |
